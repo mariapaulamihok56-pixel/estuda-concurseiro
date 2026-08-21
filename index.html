@@ -270,7 +270,7 @@ async function realizarAcessoSupabase() {
       alert('As senhas não coincidem.');
       return;
     }
-    const { data, error } = await supabaseClient.auth.signUp({ email, senha });
+    const { data, error } = await supabaseClient.auth.signUp({ email, password: senha });
     if (error) {
       alert('Erro no cadastro: ' + error.message);
       return;
