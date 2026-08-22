@@ -532,7 +532,14 @@ arr.forEach((s,i)=>{let sm=s.name.toLowerCase().includes(q),vis=s.topics.map((t,
 document.getElementById('vertical').innerHTML=h;let all=arr.reduce((a,s)=>a+s.topics.length,0),doneAll=arr.reduce((a,s)=>a+s.topics.filter((_,t)=>done(arr.indexOf(s),t)).length,0),pct=all?Math.round(doneAll/all*100):0;document.getElementById('overall').textContent=pct+'% concluído';document.getElementById('overallBar').style.width=pct+'%';document.getElementById('counts').textContent=doneAll+' de '+all+' tópicos'}
 function setCheck(s,t,c,v){state.checks[key(s,t,c)]=v;save();renderEdital();renderDashboard()}
 function resetChecks(){if(confirm('Zerar marcações?')){Object.keys(state.checks).filter(k=>k.startsWith(state.contest+'|')).forEach(k=>delete state.checks[k]);save();renderAll()}}
-function deleteSubject(i){if(confirm('Excluir matéria?')){subjects().splice(i,1);save();renderAll()}}
+function deleteSubject(i){
+  if(confirm('Tem certeza que deseja excluir esta matéria e todos os seus assuntos?')){
+    let subs = subjects();
+    subs.splice(i, 1);
+    save();
+    renderAll();
+  }
+}
 function renderSmartInsights(){
   const el=document.getElementById('smartInsights');if(!el)return;
   const qs=state.questions||[],arr=subjects();
